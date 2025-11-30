@@ -1,4 +1,4 @@
-import { ArrowBigLeft, ArrowBigRight, ArrowRight, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import { ArrowRight, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Logo from "../logo/Logo";
 
 const Footer = () => {
