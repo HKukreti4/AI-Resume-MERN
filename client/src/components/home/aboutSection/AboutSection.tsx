@@ -1,3 +1,5 @@
+
+import resumeImage from "../../../assets/resume-image.png"
 export default function AboutSection() {
     return (
         <>
@@ -8,14 +10,16 @@ export default function AboutSection() {
                     font-family: 'Poppins', sans-serif;
                 }
             `}</style>
-            <h1 className="text-3xl font-semibold text-center mx-auto mt-16">About our apps</h1>
+            <h2 className="text-4xl text-center  md:text-5xl font-bold bg-gradient-to-r  from-blue-700  to-yellow-600  bg-clip-text text-transparent h-auto">
+            About our App
+          </h2>
             <p className="text-sm text-slate-500 text-center mt-2 max-w-md mx-auto">
                 A visual collection of our resume - each template crafted with intention, emotion and style.
             </p>
             <div className="max-w-4/5 mx-auto mb-16 flex flex-col md:flex-row items-center justify-between gap-8 px-4 md:px-0 py-10">
-                <div className="size-[520px] rounded-full absolute blur-[300px] -z-10 "></div>
-                <img className=" w-150 rounded-xl h-100 object-cover"
-                    src="https://images.unsplash.com/photo-1555212697-194d092e3b8f?q=80&w=830&h=844&auto=format&fit=crop"
+                <div className="rounded-full absolute blur-[300px] -z-10 "></div>
+                <img className=" w-120  rounded-xl h-auto object-contain"
+                    src={resumeImage}
                     alt="" />
                 <div className="flex-2 w-full">
                     <h1 className="text-3xl font-semibold">Our Latest features</h1>

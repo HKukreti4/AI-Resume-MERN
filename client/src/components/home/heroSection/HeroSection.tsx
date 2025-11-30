@@ -18,7 +18,7 @@ const HeroSection = () => {
           </p>
         </div>
 
-        <h1 className="text-center text-[40px] leading-[48px] md:text-4xl md:leading-[70px] mt-4 font-semibold max-w-3xl">
+        <h1 className="text-center md:text-[40px]  text-[25px] leading-[48px] md:text-4xl md:leading-[70px] mt-4 font-semibold max-w-3xl">
           Build a  <span className=" bg-gradient-to-r font-bold from-blue-700 to-yellow-600 bg-clip-text text-transparent text-nowrap">job winning resume </span>  in minutes <br />powered by <span className="bg-gradient-to-r font-bold from-blue-700 to-yellow-600 bg-clip-text text-transparent text-nowrap"> AI</span>.
         </h1>
 
@@ -27,13 +27,13 @@ const HeroSection = () => {
         </p>
 
         <form onSubmit={onSubmitHandler} className="bg-white/10 max-w-2xl w-full rounded-xl p-4 mt-10 border border-indigo-600/70">
-          <textarea className="bg-transparent outline-none text-gray-300 resize-none w-full" rows={4} placeholder="Describe your presentation in details" required />
-          <button className="ml-auto flex items-center gap-2 bg-gradient-to-r from-[#CB52D4] to-indigo-600 rounded-md px-4 py-2">
+          <textarea className="bg-transparent outline-none text-gray-300 resize-none w-full" rows={2} placeholder="Add role to start " required />
+          <button className="ml-auto flex cursor-pointer items-center gap-2 bg-gradient-to-r from-[#CB52D4] to-indigo-600 rounded-md px-4 py-2">
             Create with AI
           </button>
         </form>
 
-        <div className="flex flex-wrap items-center w-4/5 justify-between gap-16 md:gap-20 mx-auto mt-16">
+        <div className="md:flex flex-wrap items-center w-4/5 justify-between gap-16 md:gap-20 mx-auto mt-16 hidden">
           <img className="max-w-28 md:max-w-32" src="https://saasly.prebuiltui.com/assets/companies-logo/framer.svg" alt="" />
           <img className="max-w-28 md:max-w-32" src="https://saasly.prebuiltui.com/assets/companies-logo/huawei.svg" alt="" />
           <img className="max-w-28 md:max-w-32" src="https://saasly.prebuiltui.com/assets/companies-logo/instagram.svg" alt="" />
