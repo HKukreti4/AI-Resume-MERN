@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 
 import { fileURLToPath } from "url";
 import path from "path";
+import userRoute from "./routes/user.routes";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -22,11 +23,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 
 //  Routes
-// app.use("/api/hotels", hotelRoutes);
+app.use("/api/v1/user",userRoute);
 
 
 
-//  Health check route
+
 app.get("/", (req, res) => {
   res.status(200).json({ success: true, message: "Server is running" });
 });

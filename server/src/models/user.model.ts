@@ -1,14 +1,17 @@
 import mongoose,{Schema,Document} from "mongoose";
 import bcrypt from "bcryptjs"
-import { NextFunction } from 'express';
+
 
 
 export interface IUser extends Document{
     username:string,
     email:string,
-    password:string,
+    password:string | null,
     role:"admin"|"user",
-    avatar:string
+    avatar:string,
+    loginType:"google"|"custom"| "both",
+    googleId:string | null,
+    comparePass(password:string):Promise<boolean>
 }
 
 
@@ -21,12 +24,16 @@ const userSchema:Schema<IUser>=new mongoose.Schema<IUser>({
         email:{
              type:String,
             required:true,
+            unique:true,
             trim:true
         },
         password:{
              type:String,
-            required:true,
-            trim:true
+             trim:true,
+             select: false,
+             required: function(this: IUser) {
+            return this.loginType !== "google";
+        },
         },
         role:{
             type:String,
@@ -35,17 +42,28 @@ const userSchema:Schema<IUser>=new mongoose.Schema<IUser>({
         avatar:{
             type:String,
             default:""
-        }
+        },
+        loginType:{
+            type:String,
+            default:"custom",
+            enum: ["google", "custom", "both"]
+        },
+        googleId:{
+            type:String,
+            default:null
+        },
 })
 
 
-userSchema.pre("save",async function(next:any){
-    if(!this.isModified("password")){
-      return  next()
+userSchema.pre("save",async function(){
+    if(this.isModified("password") && this.password){
+        this.password= await  bcrypt.hash(this.password,10)
     }
-   this.password= await  bcrypt.hash(this.password,10)
-    next()
 })
 
+
+userSchema.methods.comparePass=async function(password:string){
+    return await bcrypt.compare(password,this.password)
+}
 
 export const userModel=mongoose.model<IUser>("User",userSchema)
