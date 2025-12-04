@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../logo/Logo";
+import { NavLink } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -64,12 +65,12 @@ const Navbar: React.FC = () => {
             />
           </svg>
         </button> */}
-        <a
+        <NavLink
           className="hidden md:flex bg-indigo-600 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-indigo-700 transition"
-          href="#"
+          to="/login"
         >
           Sign up
-        </a>
+        </NavLink>
         <button
           id="openMenu"
           className="md:hidden text-gray-600"
