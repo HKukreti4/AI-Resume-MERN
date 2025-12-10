@@ -21,6 +21,9 @@ export const loginUser=asyncHandler(async(req:Request,res:Response,next:NextFunc
         if(!user){
             return next(new ErrorHandler("Invalid Credentials",404))
         }
+        if (!user.password) {
+        return  next(new ErrorHandler("Please login with google",404))
+        }
         const isPassCorrect= await user.comparePass(password)
         if(!isPassCorrect){
             return next(new ErrorHandler("Invalid Credentails",404))
