@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import Logo from "../../logo/Logo";
 import { useForm, type SubmitHandler } from "react-hook-form";
+import axios from "axios";
 
 type FormValues = {
   email: string;
@@ -16,6 +17,17 @@ export default function LoginForm() {
 
   const submitHandler: SubmitHandler<FormValues> = (data) => {
     console.log(data);
+  };
+  // const googleResponse=async(authResult:any)=>{
+  //     try {
+  //         console.log("auth result",authResult);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  // }
+  const loginWithGoogle = () => {
+    // Starts Passport Google OAuth flow in same tab
+    window.location.href = `http://localhost:5000/api/v1/auth/google`;
   };
 
   return (
@@ -82,7 +94,7 @@ export default function LoginForm() {
         {
             isSubmitting?<span className="loading loading-dots loading-xs"></span>:  <button
           type="submit"
-          className="w-full mb-3 bg-indigo-500 py-2.5 rounded-full text-white"
+          className="w-full cursor-pointer mb-3 bg-indigo-500 py-2.5 rounded-full text-white"
         >
           Log in
         </button>
@@ -98,8 +110,9 @@ export default function LoginForm() {
       </p>
 
       <button
+      onClick={loginWithGoogle}
         type="button"
-        className="w-full flex items-center gap-2 justify-center my-3 bg-white border border-gray-500/30 py-2.5 rounded-full text-gray-800"
+        className="w-full cursor-pointer flex items-center gap-2 justify-center my-3 bg-white border border-gray-500/30 py-2.5 rounded-full text-gray-800"
       >
         <img
           className="h-4 w-4"

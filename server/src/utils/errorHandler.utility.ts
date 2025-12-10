@@ -1,7 +1,7 @@
 class ErrorHandler extends Error{
     statusCode:number;
     success:boolean;
-
+    
     constructor(message:string,statusCode:number=404){
         super(message)
         this.statusCode=statusCode;

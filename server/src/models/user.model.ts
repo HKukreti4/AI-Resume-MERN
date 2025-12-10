@@ -1,7 +1,8 @@
 import mongoose,{Schema,Document} from "mongoose";
 import bcrypt from "bcryptjs"
-
-
+import  jwt, { SignOptions }  from 'jsonwebtoken';
+import dotenv from "dotenv"
+dotenv.config()
 
 export interface IUser extends Document{
     username:string,
@@ -11,7 +12,10 @@ export interface IUser extends Document{
     avatar:string,
     loginType:"google"|"custom"| "both",
     googleId:string | null,
-    comparePass(password:string):Promise<boolean>
+    comparePass(password:string):Promise<boolean>,
+     generateAccessToken(): string;
+    generateRefreshToken(): string;
+    
 }
 
 
@@ -66,4 +70,29 @@ userSchema.methods.comparePass=async function(password:string){
     return await bcrypt.compare(password,this.password)
 }
 
-export const userModel=mongoose.model<IUser>("User",userSchema)
+userSchema.methods.generateAccessToken = function (): string {
+  const payload = {
+    _id: this._id.toString(),
+  };
+
+  const options: SignOptions = {
+    expiresIn: process.env.ACCESS_TOKEN_EXPIRY as SignOptions["expiresIn"]
+  };
+
+  return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET as string, options);
+};
+
+// method to generate access token and refresh token 
+userSchema.methods.generateRefreshToken = function (): string {
+  const payload = {
+    _id: this._id.toString(),
+  };
+
+  const options: SignOptions = {
+    expiresIn: process.env.REFRESH_TOKEN_EXPIRY as SignOptions["expiresIn"]
+  };
+
+  return jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET as string, options);
+};
+
+export const User=mongoose.model<IUser>("User",userSchema)
